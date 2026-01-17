@@ -24,5 +24,10 @@ typedef struct canal_struct
 
 //uint8_t       curr_model; // aktuelles modell
 
+#define BATTX        118
+#define BATTY        2
+#define BATTH        44
+#define BATTB        7
+
 
 

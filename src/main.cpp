@@ -5,7 +5,10 @@
 #include <WiFi.h>
 #include <Wire.h>
 #include "main.h"
+#include "display.h"
+
 #include "settings.h"
+
 
 #include <driver/adc.h>
 #include "elapsedMillis.h"
@@ -20,7 +23,7 @@
 #define OLED_RESET -1
 #define OLED_ADDR 0x3C
 //Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
-U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0,U8X8_PIN_NONE);
+//U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0,U8X8_PIN_NONE);
 
 //#define LED_BUILTIN 5
 #define NUM_SERVOS 4
@@ -109,6 +112,13 @@ uint8_t   tonindex = 0;
 int ledintervall = 200;
 elapsedMillis ledmillis;
 
+unsigned char char_x;
+unsigned char char_y;
+uint16_t   stopsekunde;
+ uint16_t   stopminute;
+ uint16_t   throttlecounter;
+ uint16_t    throttlesekunden;
+
 // put function declarations here:
 
 // callback when data is sent
@@ -147,20 +157,7 @@ void setup()
 
   Wire.begin(6,7);   // ESP32 I2C Pins
   delay(100);
-  /*
-  if (!display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR)) {
-    while (1) {}
-  }
-  delay(100);
-  display.clearDisplay();
-  display.setTextSize(1);
-  display.setTextColor(SSD1306_WHITE);
-  display.setCursor(0, 0);
-  display.println("LOLIN32");
-  display.println("OLED 0.96\"");
-  display.display();
-  display.setTextSize(2);
-  */
+ 
   u8g2.begin();              // Display initialisieren
   u8g2.clearBuffer();
   u8g2.setFont(u8g2_font_6x10_tf);
