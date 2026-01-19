@@ -119,6 +119,9 @@ uint16_t   stopsekunde;
  uint16_t   throttlecounter;
  uint16_t    throttlesekunden;
 
+#define LED_BUILTIN  A0
+ const int ledPin = LED_BUILTIN;
+
 // put function declarations here:
 
 // callback when data is sent
@@ -153,7 +156,7 @@ void setup()
   delay(1000);
   Serial.println("setup");
 
-  //pinMode(LED_BUILTIN, OUTPUT); 
+  pinMode(LED_BUILTIN, OUTPUT); 
 
   Wire.begin(6,7);   // ESP32 I2C Pins
   delay(100);
@@ -179,6 +182,7 @@ void loop()
   {
     ledmillis = 0;
     loopcounter++;
+    digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
     //Serial.println(loopcounter);
   } // if ledmillis
 }
